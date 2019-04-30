@@ -17,6 +17,10 @@ export default new Vuex.Store({
       return state.links.length;
     },
   },
-  mutations: {},
+  mutations: {
+    ADD_LINK: (state, payload) => {
+      state.links.push(payload);
+    },
+  },
   actions: {},
 });

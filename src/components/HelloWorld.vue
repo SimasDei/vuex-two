@@ -1,9 +1,21 @@
 <template>
   <div class="hello">
     <div class="left">
-      {{ title }}
+      <h1>
+        {{ title }}
+      </h1>
+      <form @submit.prevent="addLink">
+        <input
+          type="text"
+          class="link-input"
+          placeholder="Add a Link"
+          v-model="newLink"
+        />
+      </form>
       <ul>
-        <li v-for="link in links" :key="link">{{ link }}</li>
+        <li v-for="link in links" :key="link">
+          <a :href="link">{{ link }}</a>
+        </li>
       </ul>
     </div>
     <div class="right">
@@ -13,21 +25,33 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 import Stats from "@/components/Stats.vue";
 export default {
   name: "HelloWorld",
+  data() {
+    return {
+      newLink: ""
+    };
+  },
   components: {
     Stats
   },
   computed: {
     ...mapState(["title", "links"])
+  },
+  methods: {
+    ...mapMutations(["ADD_LINK"]),
+    addLink: function() {
+      this.ADD_LINK(this.newLink);
+      this.newLink = "";
+    }
   }
 };
 </script>
 
-<style scoped>
+<style>
 html,
 #app,
 .home {
