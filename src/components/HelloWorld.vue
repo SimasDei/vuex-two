@@ -13,8 +13,9 @@
         />
       </form>
       <ul>
-        <li v-for="link in links" :key="link">
+        <li v-for="(link, index) in links" :key="index">
           <a :href="link">{{ link }}</a>
+          <button @click="removeLinks(index)" class="rm">Remove</button>
         </li>
       </ul>
     </div>
@@ -25,7 +26,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 
 import Stats from "@/components/Stats.vue";
 export default {
@@ -43,9 +44,13 @@ export default {
   },
   methods: {
     ...mapMutations(["ADD_LINK"]),
+    ...mapActions(["removeLink"]),
     addLink: function() {
       this.ADD_LINK(this.newLink);
       this.newLink = "";
+    },
+    removeLinks: function(link) {
+      this.removeLink(link);
     }
   }
 };
@@ -89,5 +94,23 @@ ul li {
 .right {
   grid-area: right;
   background-color: #e9e9e9;
+}
+input {
+  border: none;
+  padding: 20px;
+  width: calc(100% - 40px);
+  box-shadow: 0 5px 5px #ccc;
+  margin-bottom: 50px;
+  outline: none;
+}
+.rm {
+  float: right;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  background: #f9d0e3;
+  border: none;
+  padding: 5px;
+  color: #ff0076;
+  cursor: pointer;
 }
 </style>

@@ -21,6 +21,24 @@ export default new Vuex.Store({
     ADD_LINK: (state, payload) => {
       state.links.push(payload);
     },
+    REMOVE_LINK: (state, payload) => {
+      state.links.splice(payload, 1);
+    },
+    REMOVE_ALL: state => {
+      state.links = [];
+    },
   },
-  actions: {},
+  actions: {
+    removeLink: (context, payload) => {
+      context.commit("REMOVE_LINK", payload);
+    },
+    removeAll: ({ commit }) => {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          commit("REMOVE_ALL");
+          resolve();
+        }, 1500);
+      });
+    },
+  },
 });
