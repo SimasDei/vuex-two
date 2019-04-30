@@ -3,16 +3,26 @@
     <div class="left">
       {{ title }}
     </div>
-    <div class="right"></div>
+    <ul>
+      <li v-for="link in links" :key="link">{{ link }}</li>
+    </ul>
+    <div class="right">
+      <stats />
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+
+import Stats from "@/components/Stats.vue";
 export default {
   name: "HelloWorld",
+  components: {
+    Stats
+  },
   computed: {
-    ...mapState(["title"])
+    ...mapState(["title", "links"])
   }
 };
 </script>

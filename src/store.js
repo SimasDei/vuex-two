@@ -1,16 +1,22 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    title: 'My Custom Title'
+    title: "My Custom Title",
+    links: [
+      "https://google.com",
+      "https://twitter.com",
+      "https://instagram.com",
+    ],
   },
-  mutations: {
-
+  getters: {
+    countLinks: state => {
+      return state.links.length;
+    },
   },
-  actions: {
-
-  }
-})
+  mutations: {},
+  actions: {},
+});
